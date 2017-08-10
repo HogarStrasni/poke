@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="pokemon">
+<head>
+    <meta charset="UTF-8">
+   	<title>Pokémon</title>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	  <script type="text/javascript" src="app.js"></script>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-controller="mainController">
+	<header>
+		<h2>Pokémon</h2><br>
+		<input type="text" ng-model="test" ng-change="test.name=test;test.color=test;"  class="form-control search" placeholder="Search by name or color">
+	</header>
+		
+	<div class="container-fluid wrap">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<div class="row">
+					<div class="col-lg-6" ng-repeat="poke in pokemon | orderBy : 'name' | filter:test">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3>{{poke.name}}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-6">
+										<img src="{{poke.img_url}}" class="img-responsive img-thumbnail">
+									</div>
+									<div class="col-lg-6">
+										<p><b>Number : </b>{{poke.number}}</p>
+										<p><b>Color : </b>{{poke.color}}</p>
+										<p><b>Type : </b>{{poke.type}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer text-right">
+								<button class="btn btn-primary" ng-click="display(poke)" data-toggle="modal" data-target="#myModal">Read More</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+			<!-- Modal -->
+			<div id="myModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">{{activePok.name}}</h4>
+			      </div>
+			      <div class="modal-body">
+				      <div class="col-lg-6">
+							<img src="{{activePok.img_url}}" class="img-responsive img-thumbnail">
+					  </div>
+			          <p><b>Number : </b>{{activePok.number}}</p>
+					  <p><b>Color : </b>{{activePok.color}}</p>
+					  <p><b>Type : </b>{{activePok.type}}</p>
+					  <p><b>Weight : </b>{{activePok.weight}}</p>
+					  <p><b>Height : </b>{{activePok.height}}</p>
+					  <p><b>Weakness : </b>{{activePok.weakness}}</p>
+					  <br><br>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+
+			  </div>
+			</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
